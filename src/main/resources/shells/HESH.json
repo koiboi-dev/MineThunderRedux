@@ -1,0 +1,8 @@
+{
+  "name": "HESH",
+  "fullName": "High Explosive Squash Head",
+  "tntPower": 3,
+  "launchSpeed": 4,
+  "barrelDeviationMult": 0.25,
+  "kineticEnergy": 30000
+}

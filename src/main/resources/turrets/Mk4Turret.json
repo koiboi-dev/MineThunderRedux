@@ -1,0 +1,13 @@
+{
+  "shells": ["WWI_HE"],
+  "force": 200,
+  "seatPos": [0, 0, 0],
+  "pitchRange": [-5, 15],
+  "yawRange": [20, 160],
+  "remote": true,
+  "modelID": 500,
+  "gunModelID": -1,
+  "yawSpeed": 1,
+  "pitchSpeed": 1,
+  "fixed": false
+}

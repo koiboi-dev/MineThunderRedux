@@ -1,0 +1,12 @@
+name: MineThunder
+version: '${project.version}'
+main: me.kotos.minethunder.MineThunder
+api-version: 1.20
+authors: [ Kotos ]
+description: Adds vehicles to mc!
+depend: [ ProtocolLib ]
+load: POSTWORLD
+
+commands:
+  minethunder:
+    aliases: ["mt","rv"]

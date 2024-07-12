@@ -1,0 +1,38 @@
+{
+  "type": "GROUND",
+  "name": "Mark 4",
+  "description": "Mark 4 tank developed by the british",
+  "modelID": 505,
+  "acceleration": 0.05,
+  "maxSpeed": 1,
+  "baseDrag":  0.99,
+  "turningDrag": 0.10,
+  "tiltDrag": 0.2,
+  "displayScale": [3, 3, 3],
+  "hitboxSize": [2, 2, 3],
+  "hitboxOffset": [0, 0, 1],
+  "turnSpeed": 5,
+  "turrets": [
+    {
+      "name": "Right Cannon",
+      "pos": [-2, 1, 0],
+      "type": "Mk4Turret",
+      "flipped": true,
+      "seatPos": [0, 0.5, 0]
+    },
+    {
+      "name": "Left Cannon",
+      "pos": [2, 1, 0],
+      "type": "Mk4Turret",
+      "seatPos":  [0, 0.5, 0]
+    }
+  ],
+  "seats": [
+    {
+      "pos": [0, 0.5, 0],
+      "name": "Driver",
+      "roles": ["DRIVER", "GUNNER"],
+      "seatModelID": -1
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "shells": ["HESH"],
+  "force": 600,
+  "pitchRange": [-5, 15],
+  "yawRange": [-360, 360],
+  "remote": false,
+  "modelID": 502,
+  "gunModelID": 503,
+  "yawSpeed": 5,
+  "pitchSpeed": 2,
+  "fixed": false,
+  "seatPos": [1, 1.5, -0.25]
+}
