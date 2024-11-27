@@ -1,12 +1,9 @@
-package me.kotos.minethunder.damagemodel.objects;
+package me.kotos.minethunder.damagemodel.datatypes;
 
-
-import me.kotos.minethunder.damagemodel.datatypes.Ray;
-import me.kotos.minethunder.damagemodel.datatypes.Vect;
 
 public class AABB {
-    private final Vect minV;
-    private final Vect maxV;
+    private Vect minV;
+    private Vect maxV;
 
     public AABB(Vect pos, Vect size) {
         minV = pos.clone().sub(size.clone().scale(0.5f));
@@ -47,5 +44,25 @@ public class AABB {
         return minV.getX() <= point.getX() && point.getX() <= maxV.getX() &&
                 minV.getY() <= point.getY() && point.getY() <= maxV.getY() &&
                 minV.getZ() <= point.getZ() && point.getZ() <= maxV.getZ();
+    }
+
+    public Vect getMaxV() {
+        return maxV;
+    }
+
+    public void setMaxV(Vect maxV) {
+        this.maxV = maxV;
+    }
+
+    public Vect getMinV() {
+        return minV;
+    }
+
+    public void setMinV(Vect minV) {
+        this.minV = minV;
+    }
+
+    public String toString(){
+        return "AABB("+minV.toString()+","+maxV.toString()+")";
     }
 }

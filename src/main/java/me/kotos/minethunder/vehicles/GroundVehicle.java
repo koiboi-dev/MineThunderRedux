@@ -18,16 +18,15 @@ public class GroundVehicle extends Vehicle implements Updatable {
     private float ySpeed = 0;
     private static final float GRAVITY = 0.08f;
     //private final PacketListener packetListener;
-    private double offsetY;
     private static final float DESIRED_MULT = 4;
-    private final int HEIGHT;
-    private final int WIDTH;
-    private final int LENGTH;
+    private final float HEIGHT;
+    private final float WIDTH;
+    private final float LENGTH;
     private Location prevLoc;
     private float prevYaw;
+
     public GroundVehicle(Location loc, String id) {
         super(loc, id);
-        offsetY = (float) loc.getY();
         prevLoc = loc;
 
         this.register();
@@ -52,9 +51,9 @@ public class GroundVehicle extends Vehicle implements Updatable {
             }
         };
         MineThunder.getProtocolManager().addPacketListener(packetListener);*/
-        WIDTH = getSettings().getHitboxSize()[0];
-        HEIGHT = getSettings().getHitboxSize()[1];
-        LENGTH = getSettings().getHitboxSize()[2];
+        WIDTH = (float) getSettings().getHitboxSize().getX();
+        HEIGHT = (float) getSettings().getHitboxSize().getY();
+        LENGTH = (float) getSettings().getHitboxSize().getZ();
     }
     @Override
     public void tick() {
@@ -82,7 +81,7 @@ public class GroundVehicle extends Vehicle implements Updatable {
         //setRoll(getRoll()+VectorUtils.clamp(desiredRoll-getRoll(), -(Math.abs(speed)*DESIRED_MULT)-(), Math.abs(speed)*DESIRED_MULT+0.2f));
         setPitch(getPitch()+VectorUtils.clamp(desiredPitch-getPitch(), -(Math.abs(speed)*DESIRED_MULT)-(Math.abs(desiredPitch-getPitch()) > 10 ? 2 : 0), Math.abs(speed)*DESIRED_MULT+(Math.abs(desiredPitch-getPitch()) > 10 ? 2 : 0)));
         if (Math.abs(desiredPitch-getPitch()) > 10){
-            speed *= 0.75;
+            speed *= 0.75f;
         }
 
         updateSeats();
@@ -113,13 +112,13 @@ public class GroundVehicle extends Vehicle implements Updatable {
         }
     }
     private void turnVehicle(){
-        if (Math.abs(speed) <= getSettings().getAcceleration()*4 && Math.abs(getXInput()) >= 0.01) {
+        /*if (Math.abs(speed) <= getSettings().getAcceleration()*4 && Math.abs(getXInput()) >= 0.01) {
             if (speed > 0) {
                 speed = getSettings().getAcceleration() * 4;
             } else {
                 speed = -getSettings().getAcceleration() * 4;
             }
-        }
+        }*/
         setYaw(getYaw()+getXInput()*getSettings().getTurnSpeed()*((speed+getSettings().getAcceleration())/getSettings().getMaxSpeed()));
     }
     public void updateCollisionPoints(){

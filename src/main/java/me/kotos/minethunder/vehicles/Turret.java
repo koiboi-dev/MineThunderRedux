@@ -115,8 +115,8 @@ public class Turret extends Seat {
         Vector nV = getPos().clone();
         Vector seatPos = TurretSettings.getSettings(type).seatPos().clone();
         //nV.rotateAroundZ(Math.toRadians(roll)).rotateAroundX(Math.toRadians(pitch)).rotateAroundY(Math.toRadians(yaw));
-        VectorUtils.rotateVectorByEuler(nV, getParent().getRoll(), getParent().getPitch(), getParent().getYaw());
-        VectorUtils.rotateVectorByEuler(seatPos, getParent().getRoll(), getParent().getPitch(), getParent().getYaw());
+        nV = VectorUtils.rotateVectorByEuler(nV, getParent().getRoll(), getParent().getPitch(), getParent().getYaw());
+        seatPos = VectorUtils.rotateVectorByEuler(seatPos, getParent().getRoll(), getParent().getPitch(), getParent().getYaw()+this.yaw);
         float globalPitch = (float) (getParent().getPitch() * Math.sin(Math.toRadians(this.yaw)) + getParent().getRoll() * Math.cos(Math.toRadians(this.yaw)));
         DisplayUtils.moveDisplayEntity(
                 gunModel,

@@ -9,7 +9,7 @@ public final class GroundVehicleSettings extends VehicleSettings {
     private final float baseDrag;
     private final float turningDrag;
     private final float tiltDrag;
-    public GroundVehicleSettings(String id, String name, String desc, int modelID, Vector displayScale, int[] hitboxSize, Vector hitboxOffset, float acceleration, float maxSpeed, float turnSpeed, float baseDrag, float turningDrag, float tiltDrag) {
+    public GroundVehicleSettings(String id, String name, String desc, int modelID, Vector displayScale, Vector hitboxSize, Vector hitboxOffset, float acceleration, float maxSpeed, float turnSpeed, float baseDrag, float turningDrag, float tiltDrag) {
         super(id, name, desc, modelID, displayScale, hitboxSize, hitboxOffset);
         this.acceleration = acceleration;
         this.maxSpeed = maxSpeed;

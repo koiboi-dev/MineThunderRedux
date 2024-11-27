@@ -3,6 +3,7 @@ package me.kotos.minethunder;
 import com.comphenix.protocol.ProtocolLibrary;
 import com.comphenix.protocol.ProtocolManager;
 import me.kotos.minethunder.updaters.Updater;
+import me.kotos.minethunder.vehicles.GroundVehicle;
 import me.kotos.minethunder.vehicles.settings.ShellSettings;
 import me.kotos.minethunder.vehicles.settings.TurretSettings;
 import me.kotos.minethunder.vehicles.settings.VehicleSettings;
@@ -41,7 +42,7 @@ public final class MineThunder extends JavaPlugin {
         if (!shells.exists()){
             shells.mkdir();
             MineThunder.getInstance().saveResource("shells/HESH.json", false);
-            MineThunder.getInstance().saveResource("shells/WWI_HE.json", false);
+            MineThunder.getInstance().saveResource("shells/WWI_AP.json", false);
         }
         if (!turret.exists()){
             turret.mkdir();

@@ -106,6 +106,21 @@ public class Vect implements Cloneable {
         return setY(y).setZ(z);
     }
 
+    public Vect min(Vect other) {
+        return new Vect(
+                Math.min(getX(), other.getX()),
+                Math.min(getY(), other.getY()),
+                Math.min(getZ(), other.getZ())
+        );
+    }
+    public Vect max(Vect other) {
+        return new Vect(
+                Math.max(getX(), other.getX()),
+                Math.max(getY(), other.getY()),
+                Math.max(getZ(), other.getZ())
+        );
+    }
+
     @Override
     public Vect clone() {
         try {
@@ -137,6 +152,13 @@ public class Vect implements Cloneable {
                 min.getX()+(Math.random()*(max.getX()-min.getX())),
                 min.getY()+(Math.random()*(max.getY()-min.getY())),
                 min.getZ()+(Math.random()*(max.getZ()-min.getZ()))
+        );
+    }
+    public Vector toVector(){
+        return new Vector(
+                x,
+                y,
+                z
         );
     }
 }

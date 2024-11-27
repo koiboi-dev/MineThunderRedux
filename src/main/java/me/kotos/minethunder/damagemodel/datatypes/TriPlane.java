@@ -1,8 +1,7 @@
-package me.kotos.minethunder.damagemodel.objects;
+package me.kotos.minethunder.damagemodel.datatypes;
 
 import jline.internal.Nullable;
-import me.kotos.minethunder.damagemodel.datatypes.Ray;
-import me.kotos.minethunder.damagemodel.datatypes.Vect;
+import me.kotos.minethunder.damagemodel.objects.CollisionType;
 
 public class TriPlane {
     private final Vect S1;

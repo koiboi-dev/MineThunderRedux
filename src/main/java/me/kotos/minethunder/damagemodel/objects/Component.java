@@ -1,6 +1,7 @@
 package me.kotos.minethunder.damagemodel.objects;
 
 
+import me.kotos.minethunder.damagemodel.datatypes.AABB;
 import me.kotos.minethunder.damagemodel.datatypes.CollisionData;
 import me.kotos.minethunder.damagemodel.datatypes.Ray;
 import me.kotos.minethunder.damagemodel.datatypes.Vect;
@@ -15,7 +16,9 @@ public class Component extends AABB implements DamageObject {
 
     @Override
     public CollisionData collideRayWithSelf(Ray ray) {
-        return new CollisionData(collideRay(ray), ray.getDir(), this);
+        Vect pos = collideRay(ray);
+        if (pos == null) return null;
+        return new CollisionData(pos, ray.getDir(), this);
     }
     @Override
     public int getTurretID(){

@@ -2,6 +2,7 @@ package me.kotos.minethunder.damagemodel.objects;
 
 import me.kotos.minethunder.damagemodel.datatypes.CollisionData;
 import me.kotos.minethunder.damagemodel.datatypes.Ray;
+import me.kotos.minethunder.damagemodel.datatypes.TriPlane;
 import me.kotos.minethunder.damagemodel.datatypes.Vect;
 
 public class Panel extends TriPlane implements DamageObject {

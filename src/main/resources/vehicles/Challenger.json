@@ -9,13 +9,13 @@
   "turningDrag": 0.075,
   "tiltDrag": 0.2,
   "displayScale": [3, 3, 3],
-  "hitboxSize": [2, 2, 3],
-  "hitboxOffset": [0, 0, 1],
+  "hitboxSize": [2, 1.5, 3],
+  "hitboxOffset": [0, 0, 0],
   "turnSpeed": 5,
   "turrets": [
     {
       "name": "Turret",
-      "pos": [-2, 1, 0],
+      "pos": [0, 2, 0],
       "type": "ChallengerTurret",
       "roles": ["DRIVER"]
     }
@@ -23,19 +23,19 @@
   "seats": [],
   "model": {
     "objects": [
-
       {
         "dtype":"COMP",
-        "thickness": "ENGINE",
-        "toughness": 3,
+        "type": "ENGINE",
+        "thickness": 3,
+        "toughness": 5,
         "pos":[-1.75,0.29,-1.75],
         "size":[1.6,0.87, 1.6],
         "turret": 0
       },
       {
         "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
+        "thickness": 20,
+        "toughness":1,
         "destroys": false,
         "S1":[1.65,0.33,-0.77],
         "S2":[1.65,-0.39,1],
@@ -45,112 +45,24 @@
       },
       {
         "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
+        "thickness": 20,
+        "toughness":1,
         "destroys": false,
-        "S1":[1.64,-0.4,0.42],
-        "S2":[1.64,-0.83,0.23],
-        "S3":[-1.39,-0.4,0.42],
-        "S4":[-1.39,-0.83,0.23],
-        "turret": 0
+        "S1":[-0.02,-0.39,1.58],
+        "S2":[-0.02,0.33,-0.18],
+        "S3":[-0.02,-0.39,-0.22],
+        "turret": 0,
+        "type": "TRI"
       },
       {
         "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
+        "thickness": 20,
+        "toughness":1,
         "destroys": false,
-        "S1":[-1.42,0.33,0.69],
-        "S2":[-1.42,-0.98,0.71],
-        "S3":[-1.41,0.33,-4.12],
-        "S4":[-1.41,-0.98,-4.11],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,0.33,0.69],
-        "S2":[-1.42,-0.98,0.71],
-        "S3":[-1.41,0.33,-4.12],
-        "S4":[-1.41,-0.98,-4.11],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,-0.29,0.98],
-        "S2":[-1.42,-0.98,1],
-        "S3":[-1.41,-0.29,-0.77],
-        "S4":[-1.41,-0.98,-0.75],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,-0.29,0.98],
-        "S2":[-1.42,-0.98,1],
-        "S3":[-1.41,-0.29,-0.77],
-        "S4":[-1.41,-0.98,-0.75],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,0.29,0.26],
-        "S2":[-1.42,-0.29,0.27],
-        "S3":[-1.41,0.29,-0.77],
-        "S4":[-1.41,-0.29,-0.75],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,0.29,0.4],
-        "S2":[-1.42,-0.3,0.42],
-        "S3":[-1.41,0.29,-0.77],
-        "S4":[-1.41,-0.3,-0.75],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,0.33,0.69],
-        "S2":[-1.42,-0.98,0.71],
-        "S3":[-1.41,0.33,-3.97],
-        "S4":[-1.41,-0.98,-3.96],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[-1.42,0.33,0.69],
-        "S2":[-1.42,-0.98,0.71],
-        "S3":[-1.41,0.33,-3.97],
-        "S4":[-1.41,-0.98,-3.96],
-        "turret": 0
-      },
-      {
-        "dtype":"ARMOUR",
-        "toughness": 20,
-        "health":1,
-        "destroys": false,
-        "S1":[1.64,0.33,0.32],
-        "S2":[1.64,-0.98,0.32],
-        "S3":[-1.39,0.33,0.32],
-        "S4":[-1.39,-0.98,0.32],
+        "S1":[0.02,-0.39,1.58],
+        "S2":[0.02,0.33,-0.18],
+        "S3":[0.02,-0.39,-0.22],
+        "S4":[0.02,0.07,-0.04],
         "turret": 0
       }
     ]

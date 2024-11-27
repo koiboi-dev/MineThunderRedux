@@ -9,10 +9,13 @@ public class VectorUtils {
         return Math.min(Math.max(value, min), max);
     }
 
-    public static Vector rotateVectorByEuler(Vector v, float roll, float pitch, float yaw){
+    public static Vector rotateVectorByEuler(Vector v, double roll, double pitch, double yaw){
         return v.rotateAroundZ(Math.toRadians(roll)).rotateAroundX(Math.toRadians(pitch)).rotateAroundY(Math.toRadians(yaw));
     }
 
+    public static Vector getVectorFromEuler(double pitch, double yaw){
+        return new Vector(0, 0, 1).rotateAroundX(Math.toRadians(pitch)).rotateAroundY(Math.toRadians(yaw));
+    }
     public static float getYawDifference(float start, float end){
         float result = (end - start) % 360;
         if(result < 0) result += 360;

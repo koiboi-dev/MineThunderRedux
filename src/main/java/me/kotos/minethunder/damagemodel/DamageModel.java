@@ -1,8 +1,6 @@
 package me.kotos.minethunder.damagemodel;
 
-import me.kotos.minethunder.damagemodel.datatypes.CollisionData;
-import me.kotos.minethunder.damagemodel.datatypes.Ray;
-import me.kotos.minethunder.damagemodel.datatypes.Vect;
+import me.kotos.minethunder.damagemodel.datatypes.*;
 import me.kotos.minethunder.damagemodel.objects.CollisionType;
 import me.kotos.minethunder.damagemodel.objects.Component;
 import me.kotos.minethunder.damagemodel.objects.DamageObject;
@@ -10,7 +8,6 @@ import me.kotos.minethunder.damagemodel.objects.Panel;
 import me.kotos.minethunder.utils.JSONUtils;
 import me.kotos.minethunder.vehicles.Turret;
 import me.kotos.minethunder.vehicles.Vehicle;
-import me.kotos.minethunder.damagemodel.datatypes.ShellData;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,38 +18,75 @@ import java.util.Objects;
 public class DamageModel {
     private DamageObject[] damageObjects;
     private final Vehicle parent;
+    private final AABB hitbox;
+
     public static final Vect SHRAPNEL_DEVATION_BOX_MIN = new Vect(-0.5, -0.5, -0.5);
     public static final Vect SHRAPNEL_DEVATION_BOX_MAX = new Vect(0.5, 0.5, 1);
+
     public DamageModel(Vehicle parent, JSONObject modelJSON) {
         this.parent = parent;
-        JSONArray ary = modelJSON.getJSONArray("objects");
-        damageObjects = new DamageObject[ary.length()];
-        for (int i = 0; i < ary.length(); i++) {
-            if (ary.get(i) instanceof JSONObject data) {
-                if (Objects.equals(data.getString("dtype"), "ARMOUR")) {
-                    damageObjects[i] = new Panel(
-                            JSONUtils.getVectFromJSON(data.getJSONArray("S1")),
-                            JSONUtils.getVectFromJSON(data.getJSONArray("S2")),
-                            JSONUtils.getVectFromJSON(data.getJSONArray("S3")),
-                            CollisionType.valueOf(data.optString("types")),
-                            data.getFloat("thickness"),
-                            data.getFloat("toughness"),
-                            data.getInt("turret")
-                    );
-                } else if (Objects.equals(data.getString("dtype"), "COMP")) {
-                    damageObjects[i] = new Component(
-                            JSONUtils.getVectFromJSON(data.getJSONArray("pos")),
-                            JSONUtils.getVectFromJSON(data.getJSONArray("size")),
-                            data.optFloat("health", 1000)
-                    );
+        if (modelJSON != null) {
+            JSONArray ary = modelJSON.getJSONArray("objects");
+            this.damageObjects = new DamageObject[ary.length()];
+            for (int i = 0; i < ary.length(); i++) {
+                if (ary.get(i) instanceof JSONObject data) {
+                    if (Objects.equals(data.getString("dtype"), "ARMOUR")) {
+                        this.damageObjects[i] = new Panel(
+                                JSONUtils.getVectFromJSON(data.getJSONArray("S1")),
+                                JSONUtils.getVectFromJSON(data.getJSONArray("S2")),
+                                JSONUtils.getVectFromJSON(data.getJSONArray("S3")),
+                                CollisionType.valueOf(data.optString("type", "SQUARE")),
+                                data.getFloat("thickness"),
+                                data.getFloat("toughness"),
+                                data.getInt("turret")
+                        );
+                    } else if (Objects.equals(data.getString("dtype"), "COMP")) {
+                        this.damageObjects[i] = new Component(
+                                JSONUtils.getVectFromJSON(data.getJSONArray("pos")),
+                                JSONUtils.getVectFromJSON(data.getJSONArray("size")),
+                                data.optFloat("health", 1000)
+                        );
+                    }
                 }
             }
+            this.hitbox = calculateBounds();
+        } else {
+            this.hitbox = new AABB(new Vect(0,0,0), new Vect(0,0,0));
         }
     }
-    public DamageModel(Vehicle parent, DamageObject[] objs){
+    public DamageModel(Vehicle parent, DamageObject[] objs, AABB hitbox){
         this.parent = parent;
         this.damageObjects = objs;
+        this.hitbox = hitbox;
     }
+
+    public AABB calculateBounds() {
+        Vect minV = new Vect(0,0,0);
+        Vect maxV = new Vect(0,0,0);
+
+        for (DamageObject obj : this.damageObjects) {
+            if (obj instanceof Panel p) {
+                minV = minV.min(p.getS1());
+                minV = minV.min(p.getS2());
+                minV = minV.min(p.getS3());
+                maxV = maxV.min(p.getS1());
+                maxV = maxV.min(p.getS2());
+                maxV = maxV.min(p.getS3());
+            } else if (obj instanceof Component comp) {
+                minV = minV.min(comp.getMinV());
+                maxV = maxV.max(comp.getMaxV());
+            }
+        }
+        AABB aabb = new AABB(new Vect(0,0,0), new Vect(0,0,0));
+        aabb.setMinV(minV);
+        aabb.setMaxV(maxV);
+        return aabb;
+    }
+
+    public boolean doesRayIntersectBox(Ray ray){
+        return hitbox.collideRay(getRayInverseTransform(ray, new Vect(parent.getLoc().toVector()), parent.getRoll(), parent.getPitch(), parent.getYaw())) != null;
+    }
+
     public Ray getRayInverseTransform(Ray ray, Vect point, float roll, float pitch, float yaw) {
         return ray.clone().rotateRayAroundPoint(point, roll, pitch, yaw);
     }
@@ -82,6 +116,7 @@ public class DamageModel {
         float lowestDist = Float.MAX_VALUE;
         CollisionData out = null;
         for (CollisionData v : points){
+            System.out.println(v);
             float dist = v.point().distanceSquared(ray.getOrigin());
             if (dist < lowestDist){
                 lowestDist = dist;

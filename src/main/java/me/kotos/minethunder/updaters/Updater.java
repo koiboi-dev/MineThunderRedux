@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Updater {
-    private static List<Updatable> updateables = new ArrayList<>();
-    private static List<Updatable> delete = new ArrayList<>();
-    private static List<Updatable> add = new ArrayList<>();
+    private static final List<Updatable> updateables = new ArrayList<>();
+    private static final List<Updatable> delete = new ArrayList<>();
+    private static final List<Updatable> add = new ArrayList<>();
 
     public static void tickAll(){
         updateables.addAll(add);
@@ -25,7 +25,7 @@ public class Updater {
     }
 
     public static void removeUpdatable(Updatable updateable){
-        add.add(updateable);
+        delete.add(updateable);
     }
     public static List<Vehicle> getAllVehicles(){
         List<Vehicle> vehicles = new ArrayList<>();

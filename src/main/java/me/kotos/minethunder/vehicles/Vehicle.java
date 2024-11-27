@@ -83,7 +83,7 @@ public abstract class Vehicle {
                     MineThunder.getInstance().getLogger().severe("BAD TURRET TYPE IN " + obj.getString("name"));
                 }
             }
-            damageModel = new DamageModel(this, obj.optJSONObject("model", new JSONObject()));
+            damageModel = new DamageModel(this, obj.optJSONObject("model"));
             model = DisplayUtils.getDisplayEntity(loc, VehicleSettings.getSettings(id).getModelID(), VehicleSettings.getSettings(id).getDisplayScale());
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
@@ -191,5 +191,9 @@ public abstract class Vehicle {
 
     public void setYInput(float yInput) {
         this.yInput = yInput;
+    }
+
+    public DamageModel getDamageModel() {
+        return damageModel;
     }
 }

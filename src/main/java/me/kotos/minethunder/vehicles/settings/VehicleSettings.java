@@ -21,14 +21,14 @@ public abstract class VehicleSettings {
     //private final float acceleration;
     //private final float maxSpeed;
     private final Vector displayScale;
-    private final int[] hitboxSize;
+    private final Vector hitboxSize;
     private final Vector hitboxOffset;
     /*private final float turnSpeed;
     private final float baseDrag;
     private final float turningDrag;
     private final float tiltDrag;*/
 
-    public VehicleSettings(String id, String name, String desc, int modelID, Vector displayScale, int[] hitboxSize, Vector hitboxOffset) {
+    public VehicleSettings(String id, String name, String desc, int modelID, Vector displayScale, Vector hitboxSize, Vector hitboxOffset) {
         this.id = id;
         this.name = name;
         this.desc = desc;
@@ -53,7 +53,7 @@ public abstract class VehicleSettings {
                             //obj.getFloat("acceleration"),
                             //obj.getFloat("maxSpeed"),
                             JSONUtils.getVectorFromJSON(obj.getJSONArray("displayScale")),
-                            JSONUtils.getIntegerArrayFromJSON(obj.getJSONArray("hitboxSize")),
+                            JSONUtils.getVectorFromJSON(obj.getJSONArray("hitboxSize")),
                             JSONUtils.getVectorFromJSON(obj.getJSONArray("hitboxOffset")),
                             //obj.getFloat("turnSpeed"),
                             //obj.getFloat("baseDrag"),
@@ -100,7 +100,7 @@ public abstract class VehicleSettings {
         return displayScale;
     }
 
-    public int[] getHitboxSize() {
+    public Vector getHitboxSize() {
         return hitboxSize;
     }
 

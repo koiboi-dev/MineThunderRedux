@@ -3,7 +3,6 @@ package me.kotos.minethunder.damagemodel.datatypes;
 import me.kotos.minethunder.damagemodel.objects.Component;
 import me.kotos.minethunder.damagemodel.objects.DamageObject;
 import me.kotos.minethunder.damagemodel.objects.Panel;
-import me.kotos.minethunder.damagemodel.objects.TriPlane;
 
 public record CollisionData(Vect point, Vect dir, DamageObject damageObject) {
     public Vect getNormal(){
