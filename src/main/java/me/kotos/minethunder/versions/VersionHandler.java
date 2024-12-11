@@ -10,8 +10,11 @@ public class VersionHandler {
         String version = MineThunder.getInstance().getServer().getClass().getPackage().getName().split("\\.")[3];
         System.out.println(version);
         switch (version){
-            case "v1_20_R3" :
-                inter = new Version_1_20_4();
+            case "v1_20_R1" :
+                inter = new Version_1_20_1();
+                break;
+            case "v1_21_R2":
+                inter = new Version_1_21_3();
                 break;
             default:
                 MineThunder.getInstance().getLogger().severe("UNSUPPORTED VERSION.");

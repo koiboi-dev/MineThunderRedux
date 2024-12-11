@@ -4,7 +4,6 @@
   "tntPower": 0,
   "damage": 0.5,
   "launchSpeed": 2,
-  "width": 20,
   "barrelDeviationMult": 1,
   "kineticEnergy": 400000
 }

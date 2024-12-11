@@ -29,7 +29,11 @@ public abstract class Vehicle {
     private final Seat[] seats;
     private float xInput;
     private float yInput;
+    private boolean shift;
+    private boolean jump;
+    private boolean sprint;
     private final DamageModel damageModel;
+    private boolean enabled = true;
 
     public Vehicle(Location loc, String id){
         this.loc = loc;
@@ -195,5 +199,45 @@ public abstract class Vehicle {
 
     public DamageModel getDamageModel() {
         return damageModel;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public boolean isShiftPressed() {
+        return shift;
+    }
+
+    public void setShift(boolean shift) {
+        this.shift = shift;
+    }
+
+    public boolean isJumpPressed() {
+        return jump;
+    }
+
+    public void setJump(boolean jump) {
+        this.jump = jump;
+    }
+
+    public boolean isSprintPressed() {
+        return sprint;
+    }
+
+    public void setSprint(boolean sprint) {
+        this.sprint = sprint;
+    }
+
+    public void setInputs(float xInput, float yInput, boolean jump, boolean shift, boolean sprint){
+        setXInput(xInput);
+        setYInput(yInput);
+        setJump(jump);
+        setSprint(sprint);
+        setShift(shift);
     }
 }

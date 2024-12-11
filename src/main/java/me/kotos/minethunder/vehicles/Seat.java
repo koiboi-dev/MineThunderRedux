@@ -6,8 +6,16 @@ import me.kotos.minethunder.enums.SeatType;
 import me.kotos.minethunder.utils.DisplayUtils;
 import me.kotos.minethunder.utils.VectorUtils;
 import me.kotos.minethunder.versions.VersionHandler;
+import me.kotos.minethunder.weaponry.weapons.FireGroup;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
+import org.bukkit.event.inventory.InventoryType;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.Vector;
+
+import java.util.Optional;
 
 public class Seat {
     private final Vector pos;
@@ -18,6 +26,8 @@ public class Seat {
     private Player seated = null;
     private Vehicle parent;
     private PacketAdapter adapter;
+    private final PlayerInventory layoutInventory;
+    private PlayerInventory playerInventory = null;
 
     public Seat(Vehicle parent, Vector pos, String name, SeatType[] types, int seatModel) {
         this.parent = parent;
@@ -39,6 +49,7 @@ public class Seat {
                 break;
             }
         }
+        layoutInventory = generateDefaultLayout();
     }
 
     private long lastStamp = 0;
@@ -49,10 +60,15 @@ public class Seat {
             lastStamp = inter.getLastInteraction().getTimestamp();
             seat.addPassenger(seated);
             parent.getSeated().add(seated);
+            playerInventory = seated.getInventory();
+            seated.getInventory().setContents(layoutInventory.getContents());
         }
         if (seated != null && (seat.getPassengers().size() == 0 || seat.getPassengers().get(0) != seated)){
             // Player left seat!
             System.out.println("Exited Seat!");
+            seated.getInventory().setContents(playerInventory.getContents());
+            playerInventory = null;
+
             parent.getSeated().remove(seated);
             seated = null;
         }
@@ -99,5 +115,21 @@ public class Seat {
 
     public ItemDisplay getSeat() {
         return seat;
+    }
+
+    public void ejectPlayer(){
+        seat.eject();
+    }
+
+    public PlayerInventory generateDefaultLayout(){
+        return null;
+    }
+
+    public Optional<Inventory> getLayoutInventory() {
+        return Optional.ofNullable(layoutInventory);
+    }
+
+    public boolean hasLayoutInventory() {
+        return layoutInventory != null;
     }
 }

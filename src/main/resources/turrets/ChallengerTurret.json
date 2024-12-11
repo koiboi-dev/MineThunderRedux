@@ -1,6 +1,5 @@
 {
   "shells": ["HESH"],
-  "force": 600,
   "pitchRange": [-2.5, 5],
   "yawRange": [-360, 360],
   "remote": false,
@@ -9,5 +8,23 @@
   "yawSpeed": 5,
   "pitchSpeed": 2,
   "fixed": false,
-  "seatPos": [-0.85, 0, -0.35]
+  "seatPos": [-0.85, 0, -0.35],
+  "weapons": [{
+    "pos": [2, 0.25, 0],
+    "barrelMounted": true,
+    "type": "L30A1",
+    "fireGroup": 0
+  }],
+  "fireGroups": [
+    {
+      "name": "Main Cannon",
+      "material": "LEVER",
+      "shellFolder": true
+    },
+    {
+      "name": "Machine Gun",
+      "material": "REDSTONE_TORCH",
+      "shellFolder": false
+    }
+  ]
 }

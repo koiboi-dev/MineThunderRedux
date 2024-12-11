@@ -52,4 +52,14 @@ public class JSONUtils {
         }
         return out;
     }
+
+    public static String[] getStringArrayFromJSON(JSONArray obj) {
+        String[] out = new String[obj.length()];
+        int loops = 0;
+        for (Object type : obj){
+            out[loops] = (String)type;
+            loops++;
+        }
+        return out;
+    }
 }

@@ -8,6 +8,10 @@ import me.kotos.minethunder.damagemodel.objects.Panel;
 import me.kotos.minethunder.utils.JSONUtils;
 import me.kotos.minethunder.vehicles.Turret;
 import me.kotos.minethunder.vehicles.Vehicle;
+import org.bukkit.Color;
+import org.bukkit.Location;
+import org.bukkit.Particle;
+import org.bukkit.util.Vector;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -158,5 +162,41 @@ public class DamageModel {
             calculateShrapnel(collisionPoint, penNeeded);
         }
         calculateProjectileStrike(collisionPoint.getOutRay(penNeeded), penLeft, produceShrapnel);
+    }
+
+    public void renderComponents() {
+        DamageObject[] var1 = this.damageObjects;
+        int var2 = var1.length;
+
+        for(int var3 = 0; var3 < var2; ++var3) {
+            DamageObject obj = var1[var3];
+            if (obj instanceof TriPlane tri) {
+                debugParticle((Location)this.parent.getLoc().add(tri.getS1().toVector()), Color.BLUE, 3);
+                debugParticle((Location)this.parent.getLoc().add(tri.getS2().toVector()), Color.BLUE, 3);
+                debugParticle((Location)this.parent.getLoc().add(tri.getS3().toVector()), Color.BLUE, 3);
+            } else if (obj instanceof Component comp) {
+                debugParticle((Location)this.parent.getLoc().add(comp.getMinV().toVector()), Color.ORANGE, 3);
+                debugParticle((Location)this.parent.getLoc().add(comp.getMaxV().toVector()), Color.ORANGE, 3);
+            }
+        }
+
+    }
+
+    public static void debugLine(Location startLoc, Location endLoc, float interval, Color color, int size) {
+        float distance = (float)startLoc.distance(endLoc);
+        Vector dir = endLoc.toVector().subtract(endLoc.toVector()).normalize();
+
+        for(int i = 0; (double)i < Math.floor((double)(distance / interval)); ++i) {
+            debugParticle(startLoc.add(dir), color, size);
+        }
+
+    }
+
+    public void debugParticle(Vector loc, Color color, int size) {
+        debugParticle(loc.toLocation(this.parent.getLoc().getWorld()), color, size);
+    }
+
+    public static void debugParticle(Location loc, Color color, int size) {
+        loc.getWorld().spawnParticle(Particle.REDSTONE, loc, 1, new Particle.DustOptions(color, (float)size));
     }
 }

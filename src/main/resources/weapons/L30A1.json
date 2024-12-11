@@ -1,0 +1,9 @@
+{
+  "clipSize": 1,
+  "maxReserveAmmo": 30,
+  "fireSpeed": 5,
+  "reloadTime": 65,
+  "loaderReloadTime": 20,
+  "shells": ["WWI_AP"],
+  "shellSpeed": 40
+}
